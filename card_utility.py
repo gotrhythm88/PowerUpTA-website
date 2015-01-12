@@ -1,5 +1,8 @@
 import json
 import re
+import sys
+import argparse
+import os
 
 def replace_params(template, data):
 	"""
@@ -61,21 +64,72 @@ def generate_card(template, data):
 
 	return template
 
-if __name__ == "__main__":
-	with open('class-sample.json', 'r') as f:
-		json_str = f.read()
-	json_data = json.loads(json_str)
+def make_parser():
+	parser = argparse.ArgumentParser(
+		prog='card_utility.py'
+		, description = "Utility to generate html and other files from templates and json data"
+	)
 
-	with open('template.html', 'r') as f:
-		html_template = f.read()
+	parser.add_argument("template", help="HTML or other template to be filled in with JSON data")
+	parser.add_argument("-j", "--json", help="JSON data to be filled into template")
+	parser.add_argument("-f", "--filename", help="output filename", default="output")
+	parser.add_argument("-i", "--input", help="directory of JSON files to be processed into template", default="cards")
+	parser.add_argument("-o", "--output", help="directory of output files", default="output")
 
-	with open('template.js', 'r') as f:
-		js_template = f.read()
+	return parser
 
-	html = generate_card(html_template, json_data)
-	with open("output.html", 'w') as f:
-		f.write(html)
+
+def main():
+	# Create command line parser
+	parser = make_parser()
+	args = parser.parse_args(sys.argv[1:])
+
+	# Convert parsed arguments from Namespace to dictionary
+	args = vars(args)
 	
-	js = generate_card(js_template, json_data)
-	with open("output.js", 'w') as f:
-		f.write(js)
+	# Get the template
+	filename = args["template"]
+	template_ext = filename[filename.find("."):]
+	with open(filename, 'r') as f:
+		template = f.read()
+
+	# If user supplied single file of JSON data, process that data into the template
+	if args["json"] != None:
+		# Get JSON data
+		filename = args["json"]
+		with open(filename, 'r') as f:
+			json_str = f.read()
+		json_data = json.loads(json_str)
+		# Process it into the template
+		output = generate_card(template, json_data)
+		filename = args["filename"]
+		if filename == "output":
+			filename += template_ext
+		with open(filename, 'w') as f:
+			f.write(output)
+		return
+	# Otherwise, check if user supplied a directory of JSON files to use (and try default "cards")
+	else:
+		input_dir = args["input"]
+		output_dir = args["output"]
+		for fn in os.listdir(input_dir):
+			file_ext = fn[fn.find("."):]
+			file_begin = fn[:fn.find(".")]
+			filename = input_dir + '/' + fn
+			# if file is a JSON file
+			if (os.path.isfile(filename) and file_ext == ".json"):
+				# Get JSON data
+				with open(filename, 'r') as f:
+					json_str = f.read()
+				json_data = json.loads(json_str)
+				# Process into the template
+				output = generate_card(template, json_data)
+				# Create the output directory if it does not already exist
+				if not os.path.exists(output_dir):
+					os.mkdir(output_dir)
+				# Write to output directory
+				with open(output_dir + "/" + file_begin + template_ext, 'w') as f:
+					f.write(output)
+
+if __name__ == "__main__":
+	main()
