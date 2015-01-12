@@ -1,0 +1,57 @@
+{
+	"class-id": "scratch",
+	"class-title": "Introduction to Scratch",
+	"fa-icon": "fa-puzzle",
+    "grade-range": "3-5",
+    "age-range": "8-10",
+    "level": "Beginner to Intermediate",
+    "description": "The perfect first course in programming!\nScratch is a visual language designed for kids by the MIT Media Lab. It removes early challenges to coding such as syntax errors and typing skills by using visual, drag and drop interface.",
+	"schedule":
+	[
+		{
+			"season": "Spring 2015",
+			"courses":
+			[
+				{
+					"dates": "March 1-31",      
+					"day": "Tuesdays",
+					"time": "4:00-5:00pm",
+					"location": "Lincoln Square"
+				},
+				{
+					"dates": "March 1-31",      
+					"day": "Thursdays",
+					"time": "3:00-4:00pm",
+					"location": "Lakeview"
+				}
+			]
+		},
+		{
+			"season": "Summer 2015",
+			"courses":
+			[
+				{
+					"dates": "July 6-10",      
+					"time": "9:00am-4:00pm",
+					"location": "Lakeview"
+				},
+				{
+					"dates": "July 13-17",      
+					"time": "9:00am-4:00pm",
+					"location": "Lakeview"
+				}
+			]
+		},
+		{
+			"season": "Fall 2015",
+			"courses":
+			[
+				{
+					"dates": "TBD",      
+					"time": "TBD",
+					"location": "TBD"
+				}
+			]
+		}
+	]
+}

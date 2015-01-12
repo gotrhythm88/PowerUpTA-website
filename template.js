@@ -1,33 +1,33 @@
 /* Javascript */
 
-$('#i-info-scratch').click(function()
+$('#i-info-{{ class-id }}').click(function()
 {
 	/* icons */
-	$('#i-info-scratch').css('display','none');
-	$('#i-close-scratch').show();
-	$('#i-scratch').show();
+	$('#i-info-{{ class-id }}').css('display','none');
+	$('#i-close-{{ class-id }}').show();
+	$('#i-{{ class-id }}').show();
 	
 	/* content */
-	$('#accordion-scratch').css('display','none');
-	$('#desc-scratch').show();
+	$('#accordion-{{ class-id }}').css('display','none');
+	$('#desc-{{ class-id }}').show();
 
 	/* color */
-	$('#card-scratch').css('background','#bbd4de');	
+	$('#card-{{ class-id }}').css('background','#bbd4de');	
 });
 
 
-$('#i-close-scratch').click(function()
+$('#i-close-{{ class-id }}').click(function()
 {
 	/* icons */
-	$('#i-info-scratch').show();
-	$('#i-close-scratch').css('display','none');
-	$('#i-scratch').css('display','none');
+	$('#i-info-{{ class-id }}').show();
+	$('#i-close-{{ class-id }}').css('display','none');
+	$('#i-{{ class-id }}').css('display','none');
 	
 	/* content */
-	$('#accordion-scratch').show();
-	$('#desc-scratch').css('display','none');
+	$('#accordion-{{ class-id }}').show();
+	$('#desc-{{ class-id }}').css('display','none');
 
 	/* color */
-	$('#card-scratch').css('background','#e4eef2');	
+	$('#card-{{ class-id }}').css('background','#e4eef2');	
 
 });
