@@ -7,58 +7,54 @@ def replace_params(template, data):
 	Replace the parameters and return new text
 	"""
 	# Find all variables between curly braces, potentially with some spaces
-	matches = re.findall("({{ *)(.*)( *}})", template)
+	matches = re.findall("({{ *)(\w*-*\w*)( *}})", template)
 	# Process the matches
 	for match in matches:
-		key = match[1].strip()
+		key = match[1]
 		if key in data:
 			template = template.replace(match[0] + match[1] + match[2], data[key])
 		# If no data supplied in dictionary, that was an optional parameter, just delete it
 		else:
-			template.replace(match[0] + match[1] + match[2], "")
+			template = template.replace(match[0] + match[1] + match[2], "")
 	return template
 
 def generate_card(template, data):
 	"""
 	Matches json data found in data to parameters in template
-	Recursively fills in data with for loops
+	Recursively fills in for loops
 	"""
 	# Look for a loop
 	loop_start = re.search("{{( *)for (\w+) in (\w+)( *)}}", template)
 	# If we found a loop, process it
 	if loop_start:
-		# Pull out the data for that loop
-		key = loop_start.group(3)
-		dict_ = data[key]
-
 		# Find the end of the for loop
-		begin = loop_start.end()
-		loop_end = re.search("{{( *)endfor( *)}}", template[begin:])
-		end = 0
+		loop_start_begin = loop_start.start()
+		loop_start_end = loop_start.end()
+		loop_close = re.search("{{( *)endfor( *)}}", template[loop_start_end:])
 
-		if loop_end:
-			while loop_end.start() > end:
-				end = begin + loop_end.start()
-				loop_end = re.search("{{( *)endfor( *)}}", template[end:])
-		
+		loop_close_begin = loop_start_end
+		loop_close_end = loop_start_end
+
+		# Find the end of the outermost for loop
+		while loop_close:
+			loop_close_begin = loop_close_end + loop_close.start()
+			loop_close_end += loop_close.end()
+			loop_close = re.search("{{( *)endfor( *)}}", template[loop_close_end:])
+
 		# Split up the template
-		beginning = template[:begin]
-		middle = template[begin:end]
-		#print "middle is " + middle
-		end = template[end:]
+		beginning = template[:loop_start_begin]
+		middle = template[loop_start_end:loop_close_begin]
+		end = template[loop_close_end:]
 
 		# Recursively process the middle and concatenate to the beginning
+		# Pull out the data for the loop from the dictionary
+		key = loop_start.group(3)
+		dict_ = data[key]
 		for element in dict_:
-			#print "element is " + str(element)
-			#print "middle is " + middle
 			beginning += generate_card(middle, element)
 
 		# Add back on the end
 		template = beginning + end
-
-		# Clean up
-		template = template.replace("{{( *)for (\w+) in (\w+)( *)}}", "")
-		template = template.replace("{{( *)endfor( *)}}", "")
 
 	# Process any remaining simple replacements
 	template = replace_params(template, data)
