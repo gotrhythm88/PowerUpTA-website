@@ -27,13 +27,13 @@ def generate_card(template, data):
 	Recursively fills in for loops
 	"""
 	# Look for a loop
-	loop_start = re.search("{{( *)for (\w+) in (\w+)( *)}}\n", template)
+	loop_start = re.search("\t*{{( *)for (\w+) in (\w+)( *)}}\n", template)
 	# If we found a loop, process it
 	if loop_start:
 		# Find the end of the for loop
 		loop_start_begin = loop_start.start()
 		loop_start_end = loop_start.end()
-		loop_close = re.search("{{( *)endfor( *)}}\n", template[loop_start_end:])
+		loop_close = re.search("\t*{{( *)endfor( *)}}\n", template[loop_start_end:])
 
 		loop_close_begin = loop_start_end
 		loop_close_end = loop_start_end
@@ -42,7 +42,7 @@ def generate_card(template, data):
 		while loop_close:
 			loop_close_begin = loop_close_end + loop_close.start()
 			loop_close_end += loop_close.end()
-			loop_close = re.search("{{( *)endfor( *)}}\n", template[loop_close_end:])
+			loop_close = re.search("\t*{{( *)endfor( *)}}\n", template[loop_close_end:])
 
 		# Split up the template
 		beginning = template[:loop_start_begin]
