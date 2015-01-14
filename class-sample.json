@@ -12,6 +12,7 @@
 			"season": "Spring 2015",
 			"season-id": "One",
 			"collapsed-indicator": "",
+			"accordion-status": "panel-collapse collapse in",
 			"courses":
 			[
 				{
@@ -32,6 +33,7 @@
 			"season": "Summer 2015",
 			"season-id": "Two",
 			"collapsed-indicator": "class=\"collapsed\" ",
+			"accordion-status": "panel-collapse collapse",
 			"courses":
 			[
 				{
@@ -50,6 +52,7 @@
 			"season": "Fall 2015",
 			"season-id": "Three",
 			"collapsed-indicator": "class=\"collapsed\" ",
+			"accordion-status": "panel-collapse collapse",
 			"courses":
 			[
 				{

@@ -12,16 +12,16 @@
 	</div>
 	
 	<div class="panel-group" id="accordion-{{ class-id }}" role="tablist" aria-multiselectable="true">
-	  {{ for season in schedule }}
+	{{ for season in schedule }}
 	  <div class="panel panel-default">
 	    <div class="panel-heading" role="tab" id="heading{{ season-id }}">
 		  <h4 class="panel-title">
 		    <a {{ collapsed-indicator }}data-toggle="collapse" data-parent="#accordion-scratch" href="#collapse{{ season-id }}" aria-expanded="false" aria-controls="collapse{{ season-id }}">
-		      {{ season }}
+			{{ season }}
 		    </a>
 		  </h4>
 		</div>
-	    <div id="collapse{{ season-id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ season-id }}">
+	    <div id="collapse{{ season-id }}" class="{{ accordion-status }}" role="tabpanel" aria-labelledby="heading{{ season-id }}">
 	      <div class="panel-body">
 		    <ul>
 			{{ for course in courses }}
@@ -33,6 +33,6 @@
 		  </div>
 	    </div>
 	  </div>
-	  {{ endfor }}
+	{{ endfor }}
 	</div>
 </div>
