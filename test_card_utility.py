@@ -1,9 +1,46 @@
 import unittest
 import json
 
-from card_utility import replace_params, generate_card
+from card_utility import replace_params, generate_card, process_json
 
 class TestCardUtility(unittest.TestCase):
+	def test_process_json(self):
+		json_str = """{
+			"tab1": "	This is tab 1."
+			,"tab2": "This is tab 2.	"
+			,"tab3": "	This is tab 3.	"
+			,"newline1": "This
+			is newline 1."
+			,"newline2": "
+			This is newline 2."
+			,"newline3": "This is newline 3.
+			"
+			,"spaces1": "  This is spaces 1."
+			,"spaces2": "This is spaces 2.  "
+			,"spaces3": "  This is spaces 3.  "
+			,"spaces4": "  This is  spaces 4.  "
+		}"""
+
+		correct_str = """{ "tab1": " This is tab 1." ,
+"tab2": "This is tab 2. " ,
+"tab3": " This is tab 3. " ,
+"newline1": "This is newline 1." ,
+"newline2": " This is newline 2." ,
+"newline3": "This is newline 3. " ,
+"spaces1": " This is spaces 1." ,
+"spaces2": "This is spaces 2. " ,
+"spaces3": " This is spaces 3. " ,
+"spaces4": " This is spaces 4. " }"""
+		
+		# Check that the string processes correctly
+		self.assertEqual(process_json(json_str), correct_str)
+		# Check that the json loads into the python dictionary correctly
+		json_data = json.loads(process_json(json_str))
+		self.assertEqual(json_data, json.loads(correct_str))
+		self.assertEqual(len(json_data), 10)
+		self.assertEqual(json_data["tab3"], " This is tab 3. ")
+		self.assertEqual(json_data["spaces4"], " This is spaces 4. ")
+
 	def test_replace_params(self):
 		# Test some basic examples
 		template = "Hello, my name is {{ name }}. I like to do {{activity}}. My friend's name is {{ friend-name}}. She likes to {{ friend-activity }}. This line is optional:{{ optional }}."
