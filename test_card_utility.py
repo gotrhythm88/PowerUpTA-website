@@ -21,16 +21,8 @@ class TestCardUtility(unittest.TestCase):
 			,"spaces4": "  This is  spaces 4.  "
 		}"""
 
-		correct_str = """{ "tab1": " This is tab 1." ,
-"tab2": "This is tab 2. " ,
-"tab3": " This is tab 3. " ,
-"newline1": "This is newline 1." ,
-"newline2": " This is newline 2." ,
-"newline3": "This is newline 3. " ,
-"spaces1": " This is spaces 1." ,
-"spaces2": "This is spaces 2. " ,
-"spaces3": " This is spaces 3. " ,
-"spaces4": " This is spaces 4. " }"""
+		# Tabs, newlines, multiple spaces replaced with single space
+		correct_str = """{ "tab1": " This is tab 1." ,"tab2": "This is tab 2. " ,"tab3": " This is tab 3. " ,"newline1": "This is newline 1." ,"newline2": " This is newline 2." ,"newline3": "This is newline 3. " ,"spaces1": " This is spaces 1." ,"spaces2": "This is spaces 2. " ,"spaces3": " This is spaces 3. " ,"spaces4": " This is spaces 4. " }"""
 		
 		# Check that the string processes correctly
 		self.assertEqual(process_json(json_str), correct_str)

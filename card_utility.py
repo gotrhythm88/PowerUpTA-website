@@ -9,16 +9,11 @@ def process_json(json_str):
 	Process JSON data to remove any improper white space (tabs, newlines, multiple spaces)
 	Replace these with a single space
 	"""
-	# Replace new lines
 	json_str = json_str.replace("\n", " ")
-	# Replace tabs
 	json_str = json_str.replace("\t", " ")
-	# Replace multiple spaces with one
+	
 	while json_str.find("  ") > -1:
 		json_str = json_str.replace("  ", " ")
-
-	# Add new lines after commas for readability
-	json_str = json_str.replace(",", ",\n")
 	
 	return json_str
 
