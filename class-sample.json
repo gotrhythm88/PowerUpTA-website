@@ -9,6 +9,7 @@
 	"schedule":
 	[
 		{
+			"class-id": "scratch",
 			"season": "Spring 2015",
 			"season-id": "One",
 			"collapsed-indicator": "",
@@ -30,6 +31,7 @@
 			]
 		},
 		{
+			"class-id": "scratch",
 			"season": "Summer 2015",
 			"season-id": "Two",
 			"collapsed-indicator": "class=\"collapsed\" ",
@@ -49,6 +51,7 @@
 			]
 		},
 		{
+			"class-id": "scratch",
 			"season": "Fall 2015",
 			"season-id": "Three",
 			"collapsed-indicator": "class=\"collapsed\" ",

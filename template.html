@@ -14,14 +14,14 @@
 	<div class="panel-group" id="accordion-{{ class-id }}" role="tablist" aria-multiselectable="true">
 	{{ for season in schedule }}
 	  <div class="panel panel-default">
-	    <div class="panel-heading" role="tab" id="heading{{ season-id }}">
+	    <div class="panel-heading" role="tab" id="{{ class-id }}-heading{{ season-id }}">
 		  <h4 class="panel-title">
-		    <a {{ collapsed-indicator }}data-toggle="collapse" data-parent="#accordion-scratch" href="#collapse{{ season-id }}" aria-expanded="false" aria-controls="collapse{{ season-id }}">
+		    <a {{ collapsed-indicator }}data-toggle="collapse" data-parent="#accordion-scratch" href="#{{ class-id }}-collapse{{ season-id }}" aria-expanded="false" aria-controls="{{ class-id }}-collapse{{ season-id }}">
 			{{ season }}
 		    </a>
 		  </h4>
 		</div>
-	    <div id="collapse{{ season-id }}" class="{{ accordion-status }}" role="tabpanel" aria-labelledby="heading{{ season-id }}">
+	    <div id="{{ class-id }}-collapse{{ season-id }}" class="{{ accordion-status }}" role="tabpanel" aria-labelledby="{{ class-id }}-heading{{ season-id }}">
 	      <div class="panel-body">
 		    <ul>
 			{{ for course in courses }}
