@@ -5,11 +5,13 @@
     "grade-range": "3-5",
     "age-range": "8-10",
     "level": "Beginner to Intermediate",
-    "description": "The perfect first course in programming!\nScratch is a visual language designed for kids by the MIT Media Lab. It removes early challenges to coding such as syntax errors and typing skills by using visual, drag and drop interface.",
+    "description": "The perfect first course in programming!<br><br>Scratch is a visual language designed for kids by the MIT Media Lab.<br>It removes early challenges to coding such as syntax errors and typing skills by using visual, drag and drop interface.",
 	"schedule":
 	[
 		{
 			"season": "Spring 2015",
+			"season-id": "One",
+			"collapsed-indicator": "",
 			"courses":
 			[
 				{
@@ -28,6 +30,8 @@
 		},
 		{
 			"season": "Summer 2015",
+			"season-id": "Two",
+			"collapsed-indicator": "class=\"collapsed\" ",
 			"courses":
 			[
 				{
@@ -44,6 +48,8 @@
 		},
 		{
 			"season": "Fall 2015",
+			"season-id": "Three",
+			"collapsed-indicator": "class=\"collapsed\" ",
 			"courses":
 			[
 				{
