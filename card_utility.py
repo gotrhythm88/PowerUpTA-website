@@ -89,10 +89,13 @@ def main():
 	except IOError as e:
 		print "I/O error({0}): {1}".format(e.errno, e.strerror)
 
+	html_output = ""
+	js_output = ""
+	scss_output = ""
+
 	# Look through all files in the card-data directory
 	for fn in os.listdir("card-data"):
 		file_ext = fn[fn.find("."):]
-		file_begin = fn[:fn.find(".")]
 		filename = "card-data" + '/' + fn
 		
 		# if file is a JSON file
@@ -109,24 +112,24 @@ def main():
 			except IOError as e:
 				print "I/O error({0}): {1}".format(e.errno, e.strerror)
 			
-			# Process the data into the templates
-			html_output = generate_card(html_template, json_data)
-			js_output = generate_card(js_template, json_data)
-			scss_output = generate_card(scss_template, json_data)
+			# Process the data into the templates and append to output strings
+			html_output += generate_card(html_template, json_data) + "\n\n"
+			js_output += generate_card(js_template, json_data)+ "\n\n"
+			scss_output += generate_card(scss_template, json_data)+ "\n\n"
 
-			# Create the output directory if it does not already exist
-			if not os.path.exists("output"):
-				os.mkdir("output")
-			# Write files to output directory
-			try:
-				with open("output/" + file_begin + ".html", 'w') as f:
-					f.write(html_output)
-				with open("output/" + file_begin + ".js", 'w') as f:
-					f.write(js_output)
-				with open("output/" + file_begin + ".scss", 'w') as f:
-					f.write(scss_output)
-			except IOError as e:
-				print "I/O error({0}): {1}".format(e.errno, e.strerror)
+	# Create the output directory if it does not already exist
+	if not os.path.exists("output"):
+		os.mkdir("output")
+	# Write files to output directory
+	try:
+		with open("output/output.html", 'w') as f:
+			f.write(html_output)
+		with open("output/output.js", 'w') as f:
+			f.write(js_output)
+		with open("output/output.scss", 'w') as f:
+			f.write(scss_output)
+	except IOError as e:
+		print "I/O error({0}): {1}".format(e.errno, e.strerror)
 
 if __name__ == "__main__":
 	main()

@@ -1,4 +1,4 @@
-/* Javascript */
+/* Javascript for {{ class-id }} card */
 
 $('#i-info-{{ class-id }}').click(function()
 {
