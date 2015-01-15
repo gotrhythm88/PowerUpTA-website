@@ -1,11 +1,11 @@
 {
 	"class-id": "scratch",
 	"class-title": "Introduction to Scratch",
-	"fa-icon": "fa-puzzle",
+	"fa-icon": "fa-puzzle-piece",
     "grade-range": "3-5",
-    "age-range": "8-10",
+    "age-range": "N/A",
     "level": "Beginner to Intermediate",
-    "description": "The perfect first course in programming!<br><br>Scratch is a visual language designed for kids by the MIT Media Lab.<br>It removes early challenges to coding such as syntax errors and typing skills by using visual, drag and drop interface.",
+    "description": "The perfect first course in programming!<br>Scratch is a visual language designed for kids by the MIT Media Lab. It removes early challenges to coding such as syntax errors and typing skills by using visual, drag and drop interface.",
 	"schedule":
 	[
 		{

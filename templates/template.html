@@ -1,0 +1,40 @@
+<div class="col-md-4">
+	<div id="card-{{ class-id }}" class="block block-light block-card">
+		<a href="#"><i id="i-info-{{ class-id }}" class="fa fa-info-circle fa-2 fa-primary more-info"></i></a>
+		<a href="#"><i id="i-close-{{ class-id }}" class="fa fa-close fa-2 fa-primary more-info"></i></a>
+		<div id="i-{{ class-id }}" class="card-large-icon">
+			<i class="fa {{ fa-icon }} fa-primary fa-border fa-6"></i>
+		</div>
+		<h3 class="heading-primary">{{ class-title }}</h3>
+		<h5 class="heading-dark">Grades {{ grade-range }}</h5>
+		<h5 class="heading-dark">{{ level }}</h5>
+		<div id="desc-{{ class-id }}">
+			{{ description }}
+		</div>
+		
+		<div class="panel-group" id="accordion-{{ class-id }}" role="tablist" aria-multiselectable="true">
+		{{ for season in schedule }}
+		  <div class="panel panel-default">
+		    <div class="panel-heading" role="tab" id="{{ class-id }}-heading{{ season-id }}">
+			  <h4 class="panel-title">
+			    <a {{ collapsed-indicator }}data-toggle="collapse" data-parent="#accordion-{{ class-id }}" href="#{{ class-id }}-collapse{{ season-id }}" aria-expanded="false" aria-controls="{{ class-id }}-collapse{{ season-id }}">
+				{{ season }}
+			    </a>
+			  </h4>
+			</div>
+		    <div id="{{ class-id }}-collapse{{ season-id }}" class="{{ accordion-status }}" role="tabpanel" aria-labelledby="{{ class-id }}-heading{{ season-id }}">
+		      <div class="panel-body">
+			    <ul>
+				{{ for course in courses }}
+			      <li>{{ dates }}<br>
+				    <a href="#">{{ day }} {{ time }} ({{ location }})</a>
+				  </li>
+				{{ endfor }}
+			    </ul>
+			  </div>
+		    </div>
+		  </div>
+		{{ endfor }}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+{
+	"class-id": "website",
+	"class-title": "Build Your Own Website",
+	"fa-icon": "fa-puzzle-piece",
+    "grade-range": "5-8",
+    "age-range": "N/A",
+    "level": "Beginner to Intermediate",
+    "description": "Learn the languages of the internet: HTML, CSS and Javascript. Kids will build a multi-page website on a topic of their choice and learn to add text, headings, links, images and embedded content such as videos. We will also cover styling tools to make pages have any look and feel they can imagine.",
+	"schedule":
+	[
+		{
+			"class-id": "website",
+			"season": "Spring 2015",
+			"season-id": "One",
+			"collapsed-indicator": "",
+			"accordion-status": "panel-collapse collapse in",
+			"courses":
+			[
+				{
+					"dates": "March 1-April 31",      
+					"day": "Mondays",
+					"time": "4:00-5:00pm",
+					"location": "Lakeview"
+				}
+			]
+		},
+		{
+			"class-id": "website",
+			"season": "Summer 2015",
+			"season-id": "Two",
+			"collapsed-indicator": "class=\"collapsed\" ",
+			"accordion-status": "panel-collapse collapse",
+			"courses":
+			[
+				{
+					"dates": "July 6-10",      
+					"time": "9:00am-3:00pm",
+					"location": "Lakeview"
+				},
+				{
+					"dates": "July 27-31",      
+					"time": "9:00am-3:00pm",
+					"location": "Lakeview"
+				}
+			]
+		}
+	]
+}

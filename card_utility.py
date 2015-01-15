@@ -77,72 +77,56 @@ def generate_card(template, data):
 
 	return template
 
-def make_parser():
-	parser = argparse.ArgumentParser(
-		prog='card_utility.py'
-		, description = "Utility to generate html and other files from templates and json data"
-	)
-
-	parser.add_argument("template", help="HTML or other template to be filled in with JSON data")
-	parser.add_argument("-j", "--json", help="JSON data to be filled into template")
-	parser.add_argument("-f", "--filename", help="output filename", default="output")
-	parser.add_argument("-i", "--input", help="directory of JSON files to be processed into template", default="cards")
-	parser.add_argument("-o", "--output", help="directory of output files", default="output")
-
-	return parser
-
-
 def main():
-	# Create command line parser
-	parser = make_parser()
-	args = parser.parse_args(sys.argv[1:])
+	# Get the templates
+	try:
+		with open("templates/template.html", 'r') as f:
+			html_template = f.read()
+		with open("templates/template.js", 'r') as f:
+			js_template = f.read()
+		with open("templates/template.scss", 'r') as f:
+			scss_template = f.read()
+	except IOError as e:
+		print "I/O error({0}): {1}".format(e.errno, e.strerror)
 
-	# Convert parsed arguments from Namespace to dictionary
-	args = vars(args)
-	
-	# Get the template
-	filename = args["template"]
-	template_ext = filename[filename.find("."):]
-	with open(filename, 'r') as f:
-		template = f.read()
-
-	# If user supplied single file of JSON data, process that data into the template
-	if args["json"] != None:
-		# Get JSON data
-		filename = args["json"]
-		with open(filename, 'r') as f:
-			json_str = f.read()
-		json_data = json.loads(json_str)
-		# Process it into the template
-		output = generate_card(template, json_data)
-		filename = args["filename"]
-		if filename == "output":
-			filename += template_ext
-		with open(filename, 'w') as f:
-			f.write(output)
-		return
-	# Otherwise, check if user supplied a directory of JSON files to use (and try default "cards")
-	else:
-		input_dir = args["input"]
-		output_dir = args["output"]
-		for fn in os.listdir(input_dir):
-			file_ext = fn[fn.find("."):]
-			file_begin = fn[:fn.find(".")]
-			filename = input_dir + '/' + fn
-			# if file is a JSON file
-			if (os.path.isfile(filename) and file_ext == ".json"):
-				# Get JSON data
+	# Look through all files in the card-data directory
+	for fn in os.listdir("card-data"):
+		file_ext = fn[fn.find("."):]
+		file_begin = fn[:fn.find(".")]
+		filename = "card-data" + '/' + fn
+		
+		# if file is a JSON file
+		if (os.path.isfile(filename) and file_ext == ".json"):
+			# Get JSON data
+			try:
 				with open(filename, 'r') as f:
 					json_str = f.read()
-				json_data = json.loads(json_str)
-				# Process into the template
-				output = generate_card(template, json_data)
-				# Create the output directory if it does not already exist
-				if not os.path.exists(output_dir):
-					os.mkdir(output_dir)
-				# Write to output directory
-				with open(output_dir + "/" + file_begin + template_ext, 'w') as f:
-					f.write(output)
+				json_str = process_json(json_str)
+				try:
+					json_data = json.loads(json_str)
+				except ValueError as e:
+					exit("Error processing JSON file: {} \n{}".format(filename, e))
+			except IOError as e:
+				print "I/O error({0}): {1}".format(e.errno, e.strerror)
+			
+			# Process the data into the templates
+			html_output = generate_card(html_template, json_data)
+			js_output = generate_card(js_template, json_data)
+			scss_output = generate_card(scss_template, json_data)
+
+			# Create the output directory if it does not already exist
+			if not os.path.exists("output"):
+				os.mkdir("output")
+			# Write files to output directory
+			try:
+				with open("output/" + file_begin + ".html", 'w') as f:
+					f.write(html_output)
+				with open("output/" + file_begin + ".js", 'w') as f:
+					f.write(js_output)
+				with open("output/" + file_begin + ".scss", 'w') as f:
+					f.write(scss_output)
+			except IOError as e:
+				print "I/O error({0}): {1}".format(e.errno, e.strerror)
 
 if __name__ == "__main__":
 	main()
