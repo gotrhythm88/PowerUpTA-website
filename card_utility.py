@@ -23,15 +23,15 @@ def replace_params(template, data):
 	Replace the parameters and return new text
 	"""
 	# Find all variables between curly braces, potentially with some spaces
-	matches = re.findall("({{ *)(\w*-*\w*)( *}})", template)
+	matches = re.findall("({{\s*)(\w+(-\w+)*)(\s*}})", template)
 	# Process the matches
 	for match in matches:
 		key = match[1]
 		if key in data:
-			template = template.replace(match[0] + match[1] + match[2], data[key])
+			template = template.replace(match[0] + match[1] + match[3], data[key])
 		# If no data supplied in dictionary, that was an optional parameter, just delete it
 		else:
-			template = template.replace(match[0] + match[1] + match[2], "")
+			template = template.replace(match[0] + match[1] + match[3], "")
 	return template
 
 def generate_card(template, data):
