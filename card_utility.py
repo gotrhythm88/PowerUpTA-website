@@ -117,6 +117,7 @@ def main():
 			js_output += generate_card(js_template, json_data)+ "\n\n"
 			scss_output += generate_card(scss_template, json_data)+ "\n\n"
 
+	"""
 	# Create the output directory if it does not already exist
 	if not os.path.exists("output"):
 		os.mkdir("output")
@@ -128,6 +129,26 @@ def main():
 			f.write(js_output)
 		with open("output/output.scss", 'w') as f:
 			f.write(scss_output)
+	except IOError as e:
+		print "I/O error({0}): {1}".format(e.errno, e.strerror)
+	"""
+	# Look for {{ cards-output }} in master files and replace with the output
+	try:
+		with open("templates/master.html", 'r') as f:
+			original = f.read()
+			new = replace_params(original, {'cards-output':html_output})
+		with open("templates/output.html", 'w') as f:
+			f.write(new)
+		with open("templates/master.js", 'r') as f:
+			original = f.read()
+			new = replace_params(original, {'cards-output':js_output})
+		with open("templates/output.js", 'w') as f:
+			f.write(new)
+		with open("templates/master.scss", 'r') as f:
+			original = f.read()
+			new = replace_params(original, {'cards-output':scss_output})
+		with open("templates/output.scss", 'w') as f:
+			f.write(new)
 	except IOError as e:
 		print "I/O error({0}): {1}".format(e.errno, e.strerror)
 
