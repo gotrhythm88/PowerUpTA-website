@@ -1,1 +1,12 @@
-Test Test Test
+This small utility can auto-generate html, javascript, and SCSS files to create card components (from Twitter Bootstrap) or other components for web development. The utility may be useful if you are building a static web site without a web framework to build and populate templates for you. We found this useful while developing a website using the Jekyll static site generator.
+
+To use:
+1) Place templates of HTML, JS, and SCSS files in the "templates" folder. Any variables that you would like to replace with data can be templated like so: {{ variable-name }}
+
+2) Place JSON-formatted data files into the "card-data" folder.
+
+3) JSON data can contain lists of arbitrary length, for example maybe the "card" represents an author and the JSON data contains a list of the author's publications. In the templates file, mark repeated sections using the following template convention: {{ for pub in publications }} ... <put stuff here> ... {{ endfor }}. **TODO: The word "pub" here actually does nothing. Change to say something like "for all publications".**
+
+4) The template will iterate through the items in the JSON list (in this case, all the publications) associated with the JSON key (in this case "publications") and repeat that section of the template for every item in the list (for every publication).
+
+5) The main() function currently takes all the output of a certain file format and inserts it into the "master" files wherever the template says {{ cards-output }}. So for each JSON data file, it populates the HTML template, appends the templates into one HTML string separated by comments, and then inserts it into the master.html file to produce output.html. However it should be relatively straightforward to update the main() function in card_utility.py to manage the input and output files differently.
