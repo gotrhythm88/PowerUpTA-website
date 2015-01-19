@@ -53,7 +53,7 @@ class TestCardUtility(unittest.TestCase):
 		# Test a basic for loop
 		template = """
 			Hello, my name is {{ name }}. I have three friends:
-			{{ for friend in friends }}
+			{{ forall friends }}
 				{{ name }} lives in {{ city }}.
 			{{endfor}}
 			My three friends are {{ adjective }}."""
@@ -94,9 +94,9 @@ class TestCardUtility(unittest.TestCase):
  		# Test a nested for loop
  		template = """
 			Hello, my name is {{ name }}. I have two friends with pets:
-			{{ for friend in friends }}
+			{{ forall friends }}
 				{{ name }}
-				{{ for pet in pets }}
+				{{ forall pets }}
 					{{ name }} is a {{ species }}.
 				{{endfor}}
 			{{endfor}}

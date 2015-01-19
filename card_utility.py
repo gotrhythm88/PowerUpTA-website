@@ -40,7 +40,7 @@ def generate_card(template, data):
 	Recursively fills in for loops
 	"""
 	# Look for a loop
-	loop_start = re.search("\t*{{( *)for (\w+) in (\w+)( *)}}\n", template)
+	loop_start = re.search("\t*{{( *)forall (\w+)( *)}}\n", template)
 	# If we found a loop, process it
 	if loop_start:
 		# Find the end of the for loop
@@ -64,7 +64,7 @@ def generate_card(template, data):
 
 		# Recursively process the middle and concatenate to the beginning
 		# Pull out the data for the loop from the dictionary
-		key = loop_start.group(3)
+		key = loop_start.group(2)
 		dict_ = data[key]
 		for element in dict_:
 			beginning += generate_card(middle, element)

@@ -15,7 +15,7 @@
 		</div>
 		
 		<div class="panel-group" id="accordion-{{ class-id }}" role="tablist" aria-multiselectable="true">
-		{{ for season in schedule }}
+		{{ forall seasons }}
 		  <div class="panel panel-default">
 		    <div class="panel-heading" role="tab" id="{{ class-id }}-heading{{ season-id }}">
 			  <h4 class="panel-title">
@@ -27,7 +27,7 @@
 		    <div id="{{ class-id }}-collapse{{ season-id }}" class="{{ accordion-status }}" role="tabpanel" aria-labelledby="{{ class-id }}-heading{{ season-id }}">
 		      <div class="panel-body">
 			    <ul>
-				{{ for course in courses }}
+				{{ forall courses }}
 			      <li>{{ dates }}<br>
 				    <a href="#">{{ day }} {{ time }} ({{ location }})</a>
 				  </li>

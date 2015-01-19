@@ -5,7 +5,7 @@ To use:
 
 2) Place JSON-formatted data files into the "card-data" folder.
 
-3) JSON data can contain lists of arbitrary length, for example maybe the "card" represents an author and the JSON data contains a list of the author's publications. In the templates file, mark repeated sections using the following template convention: {{ for pub in publications }} ... <put stuff here> ... {{ endfor }}. **TODO: The word "pub" here actually does nothing. Change to say something like "for all publications".**
+3) JSON data can contain lists of arbitrary length, for example maybe the "card" represents an author and the JSON data contains a list of the author's publications. In the templates file, mark repeated sections using the following template convention: {{ forall publications }} ... <put stuff here> ... {{ endfor }}.
 
 4) The template will iterate through the items in the JSON list (in this case, all the publications) associated with the JSON key (in this case "publications") and repeat that section of the template for every item in the list (for every publication).
 
