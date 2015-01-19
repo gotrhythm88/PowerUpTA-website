@@ -1,0 +1,16 @@
+/* Cards */
+
+.block-card {
+	margin-bottom: 30px;
+	@include box-shadow();
+}
+
+.card-large-icon {
+	text-align: center;
+}
+
+/* Beginning of auto-generated card SCSS */
+
+{{ cards-output }}
+
+/* End of auto-generated card SCSS */
